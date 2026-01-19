@@ -5,7 +5,7 @@ import UserSelector from '@/components/UserSelector/index.vue'
 import AssigneePanel from './AssigneePanel.vue'
 import type { Ref } from 'vue'
 import TaskListeners from './TaskListeners.vue'
-
+import TaskListener from './TaskListener.vue'
 const { fields } = inject<{ fields: Ref<Field[]>; admin: string[] }>('flowDesign', {
   fields: ref([]),
   admin: []
@@ -127,16 +127,12 @@ watchEffect(() => {
               </el-col>
             </el-row>
           </el-radio-group>
-          <user-selector
-            v-if="activeData.nobody === 'assign'"
-            multiple
-            v-model="activeData.nobodyUsers"
-            placeholder="指定人员"
-          />
+          <user-selector v-if="activeData.nobody === 'assign'" multiple v-model="activeData.nobodyUsers"
+            placeholder="指定人员" />
         </el-form-item>
-        <el-form-item prop="taskListeners" label="任务监听器">
+        <!-- <el-form-item prop="taskListeners" label="任务监听器">
           <TaskListeners :node="activeData" />
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="表单权限" name="formPermissions">
@@ -178,12 +174,7 @@ watchEffect(() => {
             <el-text tag="b"> 同意</el-text>
             <div class="opt-item__second">审批通过，流转到下一个节点</div>
           </div>
-          <el-switch
-            v-model="activeData.operations.complete"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.complete" inline-prompt active-text="开" inactive-text="关" />
         </div>
         <div class="opt-item">
           <el-icon :size="32" class="opt-item__icon">
@@ -193,12 +184,7 @@ watchEffect(() => {
             <el-text tag="b"> 拒绝</el-text>
             <div class="opt-item__second">当拒绝任务时，当前任务被终止，并结束整个流程</div>
           </div>
-          <el-switch
-            v-model="activeData.operations.refuse"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.refuse" inline-prompt active-text="开" inactive-text="关" />
         </div>
         <div class="opt-item">
           <el-icon :size="32" class="opt-item__icon">
@@ -210,12 +196,7 @@ watchEffect(() => {
               若审批内容存在问题，当前任务将中止并回退至特定历史任务节点
             </div>
           </div>
-          <el-switch
-            v-model="activeData.operations.back"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.back" inline-prompt active-text="开" inactive-text="关" />
         </div>
         <div class="opt-item">
           <el-icon :size="32" class="opt-item__icon">
@@ -227,12 +208,7 @@ watchEffect(() => {
               将当前任务移交给其他人处理，以便他们继续执行所需的操作
             </div>
           </div>
-          <el-switch
-            v-model="activeData.operations.transfer"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.transfer" inline-prompt active-text="开" inactive-text="关" />
         </div>
         <div class="opt-item">
           <el-icon :size="32" class="opt-item__icon">
@@ -242,12 +218,7 @@ watchEffect(() => {
             <el-text tag="b"> 委派</el-text>
             <div class="opt-item__second">将当前任务暂时交由他人处理，待其完成后再交回自己处理</div>
           </div>
-          <el-switch
-            v-model="activeData.operations.delegate"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.delegate" inline-prompt active-text="开" inactive-text="关" />
         </div>
         <div class="opt-item">
           <svg-icon class-name="opt-item__icon" name="add-user" :size="32" />
@@ -257,12 +228,7 @@ watchEffect(() => {
               在当前任务上额外添加新人员，以处理相关事项或提供必要的审批或意见
             </div>
           </div>
-          <el-switch
-            v-model="activeData.operations.addMulti"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.addMulti" inline-prompt active-text="开" inactive-text="关" />
         </div>
         <div class="opt-item">
           <svg-icon class-name="opt-item__icon" name="reduce-user" :size="32" />
@@ -272,14 +238,12 @@ watchEffect(() => {
               在当前任务中减少处理人员数量，以简化流程或重新分配责任
             </div>
           </div>
-          <el-switch
-            v-model="activeData.operations.minusMulti"
-            inline-prompt
-            active-text="开"
-            inactive-text="关"
-          />
+          <el-switch v-model="activeData.operations.minusMulti" inline-prompt active-text="开" inactive-text="关" />
         </div>
       </el-space>
+    </el-tab-pane>
+    <el-tab-pane label="任务监听器" name="taskListen">
+      <TaskListener :node="activeData" />
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -287,28 +251,52 @@ watchEffect(() => {
 <style scoped lang="scss">
 @import '@/styles/el-segmented.scss';
 
-.opt-item {
-  display: flex;
-  align-items: center;
+.el-drawer__body {
+  overflow: hidden;
 
-  .opt-item__icon {
-    background: var(--el-color-primary);
-    color: var(--el-color-white);
-    border-radius: 7px;
-    padding: 3px;
-  }
+  .el-tabs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: inherit;
 
-  .opt-item__content {
-    box-sizing: border-box;
-    flex: 1;
-    margin-left: 20px;
-    font-size: 14px;
-
-    .opt-item__second {
-      margin-top: 3px;
-      font-size: 12px;
-      color: var(--el-text-color-placeholder);
+    .el-tabs__header {
+      position: sticky;
     }
+
+    :deep(.el-tabs__content) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+
+      .opt-item {
+        display: flex;
+        align-items: center;
+
+        .opt-item__icon {
+          background: var(--el-color-primary);
+          color: var(--el-color-white);
+          border-radius: 7px;
+          padding: 3px;
+        }
+
+        .opt-item__content {
+          box-sizing: border-box;
+          flex: 1;
+          margin-left: 20px;
+          font-size: 14px;
+
+          .opt-item__second {
+            margin-top: 3px;
+            font-size: 12px;
+            color: var(--el-text-color-placeholder);
+          }
+        }
+      }
+    }
+
   }
 }
 </style>
