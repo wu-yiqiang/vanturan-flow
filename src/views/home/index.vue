@@ -184,8 +184,7 @@ const github = () => {
     />
     <el-button-group>
       <el-button @click="converterBpmn" type="primary" icon="Download"> 转bpmn </el-button>
-      <!--开源地址-->
-      <el-dropdown>
+      <!-- <el-dropdown>
         <el-button type="primary">
           开源地址
           <el-icon class="el-icon--right">
@@ -198,7 +197,7 @@ const github = () => {
             <el-dropdown-item @click.stop="github">Github</el-dropdown-item>
           </el-dropdown-menu>
         </template>
-      </el-dropdown>
+      </el-dropdown> -->
     </el-button-group>
   </FlowDesign>
 </template>
