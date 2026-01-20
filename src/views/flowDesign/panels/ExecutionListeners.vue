@@ -24,7 +24,7 @@ const delListener = (index: number) => {
   <div>
     <slot>
       <el-badge :value="node.executionListeners?.length || 0" class="item" type="primary">
-        <el-button icon="Setting" @click="drawer = true"> 配置</el-button>
+        <el-button icon="Setting" @click="drawer = true">配置</el-button>
       </el-badge>
     </slot>
     <el-drawer v-model="drawer" title="执行监听器">

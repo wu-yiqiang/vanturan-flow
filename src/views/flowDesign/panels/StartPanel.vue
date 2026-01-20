@@ -2,7 +2,7 @@
 import type { FormProperty, StartNode } from '../nodes/type'
 import type { Field } from '@/components/Render/type'
 import type { Ref } from 'vue'
-import ExecutionListeners from './ExecutionListeners.vue'
+import ExecutionListener from './ExecutionListener.vue'
 
 const { fields } = inject<{ fields: Ref<Field[]> }>('flowDesign', { fields: ref([]) })
 const props = defineProps<{
@@ -89,9 +89,10 @@ watchEffect(() => {
   <el-tabs v-model="activeName" stretch class="el-segmented">
     <el-tab-pane label="基础设置" name="basicSettings">
       <el-form label-position="top" label-width="90px">
-        <el-form-item prop="executionListeners" label="执行监听器">
-          <ExecutionListeners :node="activeData" />
-        </el-form-item>
+        <ExecutionListener :node="activeData" />
+        <!-- <el-form-item prop="executionListeners" label="执行监听器">
+          <ExecutionListener :node="activeData" />
+        </el-form-item> -->
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="表单权限" name="formPermissions">
@@ -128,4 +129,26 @@ watchEffect(() => {
 
 <style scoped lang="scss">
 @import '@/styles/el-segmented.scss';
+.el-drawer__body {
+  overflow: hidden;
+
+  .el-tabs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: inherit;
+
+    .el-tabs__header {
+      position: sticky;
+    }
+
+    :deep(.el-tabs__content) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+    }
+  }
+}
 </style>
