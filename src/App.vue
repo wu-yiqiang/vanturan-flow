@@ -10,6 +10,6 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 <style scoped>
 #app {
-  /* color: var(--el-text-color-primary); */
+  color: var(--el-text-color-primary);
 }
 </style>
