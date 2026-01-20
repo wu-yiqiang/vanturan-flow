@@ -157,12 +157,7 @@ const handleToggleDark = () => {
     document.documentElement.classList.remove('dark')
   }
 }
-const gitee = () => {
-  window.open('https://gitee.com/cai_xiao_feng/lowflow-design')
-}
-const github = () => {
-  window.open('https://github.com/tsai996/lowflow-design')
-}
+
 </script>
 
 <template>
@@ -184,20 +179,6 @@ const github = () => {
     />
     <el-button-group>
       <el-button @click="converterBpmn" type="primary" icon="Download"> 转bpmn </el-button>
-      <!-- <el-dropdown>
-        <el-button type="primary">
-          开源地址
-          <el-icon class="el-icon--right">
-            <arrow-down />
-          </el-icon>
-        </el-button>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item @click.stop="gitee">Gitee</el-dropdown-item>
-            <el-dropdown-item @click.stop="github">Github</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown> -->
     </el-button-group>
   </FlowDesign>
 </template>

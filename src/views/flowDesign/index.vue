@@ -341,7 +341,6 @@ defineExpose({
     <div class="tool">
       <slot></slot>
     </div>
-    <!--放大/缩小-->
     <div class="zoom">
       <el-tooltip content="放大" placement="bottom-start">
         <el-button icon="plus" @click="zoom += 10" :disabled="zoom >= 170" circle></el-button>
@@ -351,11 +350,9 @@ defineExpose({
         <el-button icon="minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
       </el-tooltip>
     </div>
-    <!--流程树-->
     <div class="node-container">
       <TreeNode :node="process" @addNode="addNode" @delNode="delNode" @activeNode="openPenal" />
     </div>
-    <!--属性面板-->
     <Panel v-model="penalVisible" :active-data="activeData" />
   </div>
 </template>

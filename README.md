@@ -9,13 +9,7 @@ lowflow-design是一个基于`Vue3`，`Vite`，`TypeScript`，`Element-Plus`等�
 让普通人也能通过简单配置快速搭建流程。 <br />
 并提供了将json转xml的后端代码：[lowflow-design-converter](https://gitee.com/cai_xiao_feng/lowflow-design-converter)。
 
-## 在线预览
 
-https://tsai996.github.io/lowflow-design/
-
-#### 成品案例
-
-https://demo.lowflow.vip/
 
 #### 项目源码
 
@@ -114,21 +108,6 @@ https://demo.lowflow.vip/
 └── vite.config.ts
 ~~~
 
-
-## 添加微信好友拉入群聊（备注：加群）
-<p>
-    <img alt="微信" src="public/wx.jpg" width="240" height="400" style="display: inline-block"/>
-    <img alt="QQ群" src="public/qq_qun.jpg" width="240" height="400" style="display: inline-block"/>
-</p>
-
-**求一份内推岗位**
-## 赞助
-
-开源不易如果该项目对您有帮助，您可以请我喝杯奶茶。
-<p>
-    <img alt="微信" src="public/wxpay.png" height="240" width="240" style="display: inline-block"/>
-    <img alt="支付宝" src="public/alipay.png" height="240" width="240" style="display: inline-block"/>
-</p>
 
 ## 推荐
 

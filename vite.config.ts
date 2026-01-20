@@ -12,7 +12,6 @@ import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import Unocss from 'unocss/vite'
 import {resolve} from "path";
 
-// https://vitejs.dev/config/
 export default defineConfig({
     base: '/lowflow-design',
     resolve: {
@@ -74,17 +73,14 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                // 打包分类
                 chunkFileNames: 'assets/js/[name]-[hash].js',
                 entryFileNames: 'assets/js/[name]-[hash].js',
                 assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
-                // 打包后的文件夹名称生成规则-->解决部分静态服务器无法正常返回_plugin-vue_export-helper文件
                 sanitizeFileName(name) {
                     const match = /^[a-z]:/i.exec(name)
                     const driveLetter = match ? match[0] : ''
                     return (
                         driveLetter +
-                        // eslint-disable-next-line no-control-regex
                         name.substring(driveLetter.length).replace(/[\x00-\x1F\x7F<>*#"{}|^[\]`;?:&=+$,]/g, '')
                     )
                 }

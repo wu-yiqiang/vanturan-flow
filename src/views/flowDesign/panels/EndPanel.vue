@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { EndNode } from '../nodes/type'
-import ExecutionListeners from './ExecutionListeners.vue'
-
+import ExecutionListener from './ExecutionListener.vue'
+const activeName = ref('taskListen')
 defineProps<{
   activeData: EndNode
 }>()
 </script>
 
 <template>
-  <el-form label-position="top" label-width="90px">
-    <el-form-item prop="executionListeners" label="执行监听器">
-      <ExecutionListeners :node="activeData" />
-    </el-form-item>
-  </el-form>
+  <el-tabs v-model="activeName" class="el-segmented">
+    <el-tab-pane label="执行监听器" name="taskListen">
+      <ExecutionListener :node="activeData" />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <style scoped lang="scss"></style>

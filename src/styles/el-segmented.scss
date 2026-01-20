@@ -11,7 +11,11 @@
   --el-segmented-active-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
   --el-segmented-hover-bg: rgba(0, 0, 0, 0.04);
   --el-segmented-disabled-color: var(--el-text-color-placeholder);
-
+  --el-color-primary: #ff7a00;
+    --el-color-primary-light-3: #ffa34d;
+    --el-color-primary-dark-2: #d96400;
+    --el-color-primary-light-9: #fff7f0;
+    --el-color-primary-light-7: #ffd1b8;
   :deep {
     &.is-block {
       .el-tabs__header {
