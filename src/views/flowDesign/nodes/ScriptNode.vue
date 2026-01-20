@@ -39,7 +39,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <Node v-bind="$attrs" icon="script" color="#E872B7" :node="node">
+  <Node v-bind="$attrs" icon="script" color="#eebc41" :node="node">
     <el-text>{{ content }}</el-text>
   </Node>
 </template>

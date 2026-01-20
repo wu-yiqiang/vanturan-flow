@@ -7,6 +7,7 @@ export type NodeType =
   | 'exclusive'
   | 'timer'
   | 'script'
+  | 'parallel'
   | 'notify'
   | 'service'
   | 'condition'
@@ -118,6 +119,10 @@ export interface BranchNode extends FlowNode {
 }
 
 export interface ExclusiveNode extends BranchNode {
+  branches: ConditionNode[]
+}
+
+export interface ParallelNode extends BranchNode {
   branches: ConditionNode[]
 }
 

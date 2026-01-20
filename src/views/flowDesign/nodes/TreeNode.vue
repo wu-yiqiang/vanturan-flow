@@ -11,7 +11,7 @@ import Service from './ServiceNode.vue'
 import Exclusive from './ExclusiveNode.vue'
 import Condition from './ConditionNode.vue'
 import Script from './ScriptNode.vue'
-
+import Parallel from './ParallelNode.vue'
 defineProps<{
   node: FlowNode
 }>()
@@ -24,6 +24,7 @@ const nodes: Recordable<Component> = {
   service: Service,
   script: Script,
   exclusive: Exclusive,
+  parallel: Parallel,
   condition: Condition,
   end: End
 }

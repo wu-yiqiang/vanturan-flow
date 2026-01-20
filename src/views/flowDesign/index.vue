@@ -8,7 +8,8 @@ import type { ErrorInfo, FlowNode, ServiceNode, TimerNode,ApprovalNode,
   ConditionNode,
   ExclusiveNode,
   ScriptNode,
-  NodeType } from './nodes/type'
+  NodeType, 
+  ParallelNode} from './nodes/type'
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
 import { useDraggableScroll } from '@/hooks/useDraggableScroll'
@@ -112,6 +113,46 @@ const addExclusive = (node: FlowNode) => {
     condition.def = true
     condition.name = '默认条件'
   }
+}
+const addParallel = (node: FlowNode) => {
+  const next = node.next
+  const id = nextId()
+  const parallelNode = {
+    id: id,
+    pid: node.id,
+    type: 'parallel',
+    name: '并行网关',
+    next: next,
+    branches: []
+  } as ParallelNode
+  if (next) {
+    next.pid = id
+  }
+  addParallelCondition(parallelNode)
+  addParallelCondition(parallelNode)
+  node.next = parallelNode
+  if (parallelNode.branches.length > 0) {
+    const condition = parallelNode.branches[parallelNode.branches.length - 1] as ConditionNode
+    condition.def = true
+    condition.name = '并行1'
+  }
+  console.log(parallelNode.branches);
+}
+const addParallelCondition = (node: FlowNode) => {
+  const parallel = node as ParallelNode
+  parallel.branches.splice(parallel.branches.length - 1, 0, {
+    id: nextId(),
+    pid: parallel.id,
+    type: 'condition',
+    def: false,
+    name: `条件${parallel.branches.length + 1}`,
+    conditions: {
+      operator: 'or',
+      conditions: [],
+      groups: []
+    } as FilterRules,
+    next: undefined
+  })
 }
 const addCondition = (node: FlowNode) => {
   const exclusive = node as ExclusiveNode
@@ -271,9 +312,9 @@ const addApproval = (node: FlowNode) => {
   }
 }
 const addNode = (type: NodeType, node: FlowNode) => {
-  console.log('添加节点', type, node)
   const addMap: Recordable<(node: FlowNode) => void> = {
     exclusive: addExclusive,
+    parallel: addParallel,
     condition: addCondition,
     cc: addCc,
     timer: addTimer,

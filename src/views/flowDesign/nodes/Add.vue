@@ -38,6 +38,20 @@ const addScriptNode = () => {
   $emits('addNode', 'script')
   popoverRef.value?.hide()
 }
+const addParallelNode = () => {
+   $emits('addNode', 'parallel')
+  popoverRef.value?.hide()
+}
+const nodeLists = [
+  { label: '审批人', icon: "el:Stamp", bgColor: '#ff943e', event: addApprovalNode },
+  { label: '抄送人', icon: "el:Promotion", bgColor: '#3296fa', event: addCcNode },
+  { label: '互斥分支', icon: "el:Share", bgColor: '#45cf9b', event: addExclusiveNode },
+  { label: '并行分支', icon: "Parallels", bgColor: '#4fd3b4', event: addParallelNode },
+  { label: '计时等待', icon: "el:Timer", bgColor: '#e872b7', event: addTimerNode },
+  { label: '消息通知', icon: "el:BellFilled", bgColor: '#95d475', event: addNotifyNode },
+  { label: '服务节点', icon: "el:Tools", bgColor: '#ffc107', event: addServiceNode },
+  { label: '脚本节点', icon: "Scripts", bgColor: '#eebc41', event: addScriptNode },
+]
 </script>
 
 <template>
@@ -50,33 +64,11 @@ const addScriptNode = () => {
       :width="336"
     >
       <el-space wrap>
-        <div class="node-select" @click="addApprovalNode">
-          <svg-icon name="el:Stamp" />
-          <el-text>审批人</el-text>
-        </div>
-        <div class="node-select" @click="addCcNode">
-          <svg-icon name="el:Promotion" />
-          <el-text>抄送人</el-text>
-        </div>
-        <div class="node-select" @click="addExclusiveNode">
-          <svg-icon name="el:Share" />
-          <el-text>互斥分支</el-text>
-        </div>
-        <div class="node-select" @click="addTimerNode">
-          <svg-icon name="el:Timer" />
-          <el-text>计时等待</el-text>
-        </div>
-        <div class="node-select" @click="addNotifyNode">
-          <svg-icon name="el:BellFilled" />
-          <el-text>消息通知</el-text>
-        </div>
-        <div class="node-select" @click="addServiceNode">
-          <svg-icon name="el:Tools" />
-          <el-text>服务节点</el-text>
-        </div>
-         <div class="node-select" @click="addScriptNode">
-          <svg-icon name="script_color" :size="36" />
-          <el-text>脚本节点</el-text>
+        <div v-for="(node, index) in nodeLists" :key="index" class="node-select" @click="node.event()">
+          <div :style="{backgroundColor: node?.bgColor}" class="icons">
+            <svg-icon :name="node?.icon" />
+          </div>
+          <el-text>{{ node?.label }}</el-text>
         </div>
       </el-space>
       <template #reference>
@@ -107,41 +99,25 @@ const addScriptNode = () => {
     box-shadow: var(--el-box-shadow-light);
     color: var(--el-color-primary);
   }
-
-  .svg-icon {
+  .icons {
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+     .svg-icon {
     font-size: 25px;
     padding: 5px;
     border-radius: 50%;
     color: var(--el-color-white);
 
-    &.Stamp {
-      background-color: #ff943e;
-    }
-
-    &.Promotion {
-      background-color: #3296fa;
-    }
-
-    &.Share {
-      background-color: #45cf9b;
-    }
-
-    &.Timer {
-      background-color: #e872b7;
-    }
-
-    &.BellFilled {
-      background-color: #95d475;
-    }
-
-    &.Tools {
-      background-color: #ffc107;
-    }
+   
   }
 
-  .el-text {
+
+  }
+    .el-text {
     margin-left: 10px;
   }
+ 
 }
 
 .add-but {
