@@ -34,6 +34,10 @@ const addServiceNode = () => {
   $emits('addNode', 'service')
   popoverRef.value?.hide()
 }
+const addScriptNode = () => {
+  $emits('addNode', 'script')
+  popoverRef.value?.hide()
+}
 </script>
 
 <template>
@@ -69,6 +73,10 @@ const addServiceNode = () => {
         <div class="node-select" @click="addServiceNode">
           <svg-icon name="el:Tools" />
           <el-text>服务节点</el-text>
+        </div>
+         <div class="node-select" @click="addScriptNode">
+          <svg-icon name="script_color" :size="36" />
+          <el-text>脚本节点</el-text>
         </div>
       </el-space>
       <template #reference>

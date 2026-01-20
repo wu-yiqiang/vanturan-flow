@@ -10,6 +10,7 @@ import Notify from './NotifyNode.vue'
 import Service from './ServiceNode.vue'
 import Exclusive from './ExclusiveNode.vue'
 import Condition from './ConditionNode.vue'
+import Script from './ScriptNode.vue'
 
 defineProps<{
   node: FlowNode
@@ -21,6 +22,7 @@ const nodes: Recordable<Component> = {
   timer: Timer,
   notify: Notify,
   service: Service,
+  script: Script,
   exclusive: Exclusive,
   condition: Condition,
   end: End

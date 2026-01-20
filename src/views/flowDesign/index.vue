@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import TreeNode from './nodes/TreeNode.vue'
 import Panel from './panels/index.vue'
-import type { ErrorInfo, FlowNode, ServiceNode, TimerNode } from './nodes/type'
-import type {
-  ApprovalNode,
+import type { ErrorInfo, FlowNode, ServiceNode, TimerNode,ApprovalNode,
   BranchNode,
   CcNode,
   NotifyNode,
   ConditionNode,
   ExclusiveNode,
-  NodeType
-} from './nodes/type'
+  ScriptNode,
+  NodeType } from './nodes/type'
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
 import { useDraggableScroll } from '@/hooks/useDraggableScroll'
@@ -64,7 +62,7 @@ provide('flowDesign', {
   nodesError: nodesError
 })
 const openPenal = (node: FlowNode) => {
-  console.log("node", node)
+  console.log("节点属性值", node)
   activeData.value = node
   penalVisible.value = true
 }
@@ -216,6 +214,23 @@ const addService = (node: FlowNode) => {
     next.pid = id
   }
 }
+const addScript = (node: FlowNode) => {
+  const next = node.next
+  const id = nextId()
+  node.next = {
+    id: id,
+    pid: node.id,
+    next: next,
+    type: 'script',
+    name: '脚本节点',
+    scriptType: '',
+    scriptContent: '',
+    scriptDescription: '',
+  } as ScriptNode
+  if (next) {
+    next.pid = id
+  }
+}
 const addApproval = (node: FlowNode) => {
   const next = node.next
   const id = nextId()
@@ -256,6 +271,7 @@ const addApproval = (node: FlowNode) => {
   }
 }
 const addNode = (type: NodeType, node: FlowNode) => {
+  console.log('添加节点', type, node)
   const addMap: Recordable<(node: FlowNode) => void> = {
     exclusive: addExclusive,
     condition: addCondition,
@@ -263,7 +279,8 @@ const addNode = (type: NodeType, node: FlowNode) => {
     timer: addTimer,
     notify: addNotify,
     service: addService,
-    approval: addApproval
+    approval: addApproval,
+    script: addScript
   }
   const fun = addMap[type]
   fun && fun(node)

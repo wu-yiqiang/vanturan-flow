@@ -6,6 +6,7 @@ export type NodeType =
   | 'cc'
   | 'exclusive'
   | 'timer'
+  | 'script'
   | 'notify'
   | 'service'
   | 'condition'
@@ -99,6 +100,12 @@ export interface TimerNode extends FlowNode {
   unit: 'PT%sS' | 'PT%sM' | 'PT%sH' | 'P%sD' | 'P%sW' | 'P%sM'
   duration: number
   timeDate?: string
+}
+
+export interface ScriptNode extends FlowNode {
+  scriptType: string
+  scriptContent: string
+  scriptDescription?: string
 }
 
 export interface ConditionNode extends FlowNode {
