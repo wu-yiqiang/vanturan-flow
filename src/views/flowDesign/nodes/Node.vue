@@ -19,7 +19,7 @@ const $props = withDefaults(
     node: FlowNode
     color?: string
     readOnly?: boolean
-    close?: boolean
+    close?: boolean,
   }>(),
   {
     readOnly: false,
@@ -92,13 +92,13 @@ const delNode = () => {
             />
           </div>
           <el-text tag="b" truncated v-else @click.stop="onShowInput">
-            {{ node.name }}
-            <el-icon>
+            {{ node?.name }}
+            <!-- <el-icon v-if="!_readOnly">
               <EditPen />
-            </el-icon>
+            </el-icon> -->
           </el-text>
           <slot name="icon">
-            <svg-icon :size="30" color="node-icon" v-if="icon" :name="icon" />
+            <div><svg-icon :size="30" color="node-icon" v-if="icon" :name="icon" /></div>
           </slot>
         </div>
         <!--错误提示-->

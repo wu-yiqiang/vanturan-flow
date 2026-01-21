@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { ParallelNode } from './type'
-import GatewayNode from './GatewayNode.vue'
+import type { BranchNode } from './type'
+import ParalleGatewayNode from './ParalleGatewayNode.vue';
 
 defineProps<{
-  node: ParallelNode
+  node: BranchNode
 }>()
 </script>
 
 <template>
-  <GatewayNode v-bind="$attrs" :node="node">
+  <ParalleGatewayNode v-bind="$attrs" :node="node">
     <template #default="{ addNode, readOnly }">
-      <el-button type="primary" :disabled="readOnly" @click="addNode('condition', node)" plain round
-        >添加并行节点</el-button
+      <el-button type="primary" :disabled="readOnly" @click="addNode('branch', node)" plain round
+        >添加并行分支</el-button
       >
     </template>
-  </GatewayNode>
+  </ParalleGatewayNode>
 </template>
 
 <style scoped lang="scss"></style>

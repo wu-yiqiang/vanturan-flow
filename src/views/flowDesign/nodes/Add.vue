@@ -39,18 +39,29 @@ const addScriptNode = () => {
   popoverRef.value?.hide()
 }
 const addParallelNode = () => {
-   $emits('addNode', 'parallel')
+  $emits('addNode', 'parallel')
   popoverRef.value?.hide()
 }
+const taskLists = [
+  { label: '审批人', icon: "el:Stamp", bgColor: '#ff943e', handleAdd: addApprovalNode },
+  { label: '抄送人', icon: "el:Promotion", bgColor: '#3296fa', handleAdd: addCcNode },
+  { label: '计时等待', icon: "el:Timer", bgColor: '#e872b7', handleAdd: addTimerNode },
+  { label: '消息通知', icon: "el:BellFilled", bgColor: '#95d475', handleAdd: addNotifyNode },
+  { label: '服务节点', icon: "el:Tools", bgColor: '#ffc107', handleAdd: addServiceNode },
+  { label: '脚本节点', icon: "Scripts", bgColor: '#eebc41', handleAdd: addScriptNode },
+]
+
+const gatewayLists = [
+  { label: '互斥分支', icon: "el:Share", bgColor: '#45cf9b', handleAdd: addExclusiveNode },
+  { label: '并行分支', icon: "Parallels", bgColor: '#4fd3b4', handleAdd: addParallelNode },
+]
+const eventLists: never[] = [
+ 
+]
 const nodeLists = [
-  { label: '审批人', icon: "el:Stamp", bgColor: '#ff943e', event: addApprovalNode },
-  { label: '抄送人', icon: "el:Promotion", bgColor: '#3296fa', event: addCcNode },
-  { label: '互斥分支', icon: "el:Share", bgColor: '#45cf9b', event: addExclusiveNode },
-  { label: '并行分支', icon: "Parallels", bgColor: '#4fd3b4', event: addParallelNode },
-  { label: '计时等待', icon: "el:Timer", bgColor: '#e872b7', event: addTimerNode },
-  { label: '消息通知', icon: "el:BellFilled", bgColor: '#95d475', event: addNotifyNode },
-  { label: '服务节点', icon: "el:Tools", bgColor: '#ffc107', event: addServiceNode },
-  { label: '脚本节点', icon: "Scripts", bgColor: '#eebc41', event: addScriptNode },
+  { label: '任务', children: taskLists },
+  { label: '网关', children: gatewayLists },
+  // { label: '事件', children: eventLists },
 ]
 </script>
 
@@ -60,17 +71,21 @@ const nodeLists = [
       placement="bottom-start"
       ref="popoverRef"
       trigger="click"
-      title="添加节点"
       :width="336"
     >
-      <el-space wrap>
-        <div v-for="(node, index) in nodeLists" :key="index" class="node-select" @click="node.event()">
+      <div class="item-group" v-for="(nodes, index) in nodeLists" :key="index">
+          <h4 class="title">{{ nodes?.label }}</h4>
+          <div class="nodes">
+            <el-space wrap>
+              <div v-for="(node, ind) in nodes?.children" :key="ind" class="node-select" @click="node.handleAdd()">
           <div :style="{backgroundColor: node?.bgColor}" class="icons">
             <svg-icon :name="node?.icon" />
           </div>
           <el-text>{{ node?.label }}</el-text>
+          </div>
+            </el-space>
         </div>
-      </el-space>
+        </div>
       <template #reference>
         <el-button
           v-show="!readOnly"

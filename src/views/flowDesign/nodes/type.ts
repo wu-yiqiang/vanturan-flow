@@ -8,8 +8,10 @@ export type NodeType =
   | 'timer'
   | 'script'
   | 'parallel'
+  | 'brance'
   | 'notify'
   | 'service'
+  | 'branch'
   | 'condition'
   | 'end'
 
@@ -123,7 +125,7 @@ export interface ExclusiveNode extends BranchNode {
 }
 
 export interface ParallelNode extends BranchNode {
-  branches: ConditionNode[]
+  branches: FlowNode[]
 }
 
 export interface ErrorInfo {

@@ -129,9 +129,7 @@ const fields = ref<Field[]>([
     }
   }
 ])
-// 是否只读
 const readOnly = ref(false)
-// 是否暗黑模式
 const isDark = ref(false)
 const converterBpmn = () => {
   const processModel = {

@@ -128,29 +128,22 @@ const addParallel = (node: FlowNode) => {
   if (next) {
     next.pid = id
   }
-  addParallelCondition(parallelNode)
-  addParallelCondition(parallelNode)
+  addParallelBranch(parallelNode)
+  addParallelBranch(parallelNode)
   node.next = parallelNode
   if (parallelNode.branches.length > 0) {
-    const condition = parallelNode.branches[parallelNode.branches.length - 1] as ConditionNode
-    condition.def = true
-    condition.name = '并行1'
+    const branch = parallelNode.branches[parallelNode.branches.length - 1] as ParallelNode
+    branch.name = '分支1'
   }
   console.log(parallelNode.branches);
 }
-const addParallelCondition = (node: FlowNode) => {
+const addParallelBranch = (node: FlowNode) => {
   const parallel = node as ParallelNode
   parallel.branches.splice(parallel.branches.length - 1, 0, {
     id: nextId(),
     pid: parallel.id,
-    type: 'condition',
-    def: false,
-    name: `条件${parallel.branches.length + 1}`,
-    conditions: {
-      operator: 'or',
-      conditions: [],
-      groups: []
-    } as FilterRules,
+    type: 'branch',
+    name: `分支${parallel.branches.length + 1}`,
     next: undefined
   })
 }
@@ -321,6 +314,7 @@ const addNode = (type: NodeType, node: FlowNode) => {
     notify: addNotify,
     service: addService,
     approval: addApproval,
+    branch: addParallelBranch,
     script: addScript
   }
   const fun = addMap[type]
