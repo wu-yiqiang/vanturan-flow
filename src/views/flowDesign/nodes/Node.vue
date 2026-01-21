@@ -91,14 +91,14 @@ const delNode = () => {
               v-model="node.name"
             />
           </div>
-          <el-text tag="b" truncated v-else @click.stop="onShowInput">
-            {{ node?.name }}
+          <el-text tag="b" truncated v-else>
+            <div class="name">{{ node?.name }}</div>
             <!-- <el-icon v-if="!_readOnly">
               <EditPen />
             </el-icon> -->
           </el-text>
           <slot name="icon">
-            <div><svg-icon :size="30" color="node-icon" v-if="icon" :name="icon" /></div>
+            <div><svg-icon :size="30" color="#ffff" v-if="icon" :name="icon"/></div>
           </slot>
         </div>
         <!--错误提示-->
@@ -189,7 +189,9 @@ const delNode = () => {
         display: flex;
         align-items: center;
         justify-content: space-between;
-
+        .name {
+          color: #ffff;
+        }
         :deep(.el-input__wrapper) {
           background-color: var(--el-bg-color-overlay);
         }

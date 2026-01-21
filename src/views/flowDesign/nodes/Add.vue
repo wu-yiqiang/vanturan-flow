@@ -48,7 +48,7 @@ const taskLists = [
   { label: '计时等待', icon: "el:Timer", bgColor: '#e872b7', handleAdd: addTimerNode },
   { label: '消息通知', icon: "el:BellFilled", bgColor: '#95d475', handleAdd: addNotifyNode },
   { label: '服务节点', icon: "el:Tools", bgColor: '#ffc107', handleAdd: addServiceNode },
-  { label: '脚本节点', icon: "Scripts", bgColor: '#eebc41', handleAdd: addScriptNode },
+  { label: '脚本节点', icon: "Scripts", bgColor: '#6b2fcb', handleAdd: addScriptNode },
 ]
 
 const gatewayLists = [

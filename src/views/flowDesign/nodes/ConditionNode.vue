@@ -37,7 +37,7 @@ watchEffect(() => {
 
 <template>
   <div class="branch-node">
-    <Node v-bind="$attrs" icon="el:Share" :node="node" :readOnly="node.def">
+    <Node v-bind="$attrs" icon="el:Share" :node="node" color="#708090" :readOnly="node.def">
       <el-text>{{ content }}</el-text>
       <slot name="append" />
     </Node>

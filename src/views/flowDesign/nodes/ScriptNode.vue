@@ -12,10 +12,10 @@ const { nodesError } = inject<{
 }>('flowDesign', { nodesError: ref({}) })
 const content = ref<string>('')
 watchEffect(() => {
-    // const { id, scriptName } = props.node
-    // if (scriptName) {
-    //     content.value = scriptName
-    // }
+    const { id, scriptType } = props.node
+    if (scriptType) {
+        content.value = scriptType + '脚本'
+    }
 //   const errors: ErrorInfo[] = []
 //   const { id, name, waitType, unit, duration, timeDate } = props.node
 //   if (waitType === 'date') {
@@ -39,7 +39,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <Node v-bind="$attrs" icon="script" color="#eebc41" :node="node">
+  <Node v-bind="$attrs" icon="script" color="#6b2fcb" :node="node">
     <el-text>{{ content }}</el-text>
   </Node>
 </template>

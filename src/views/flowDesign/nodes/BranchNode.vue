@@ -10,7 +10,7 @@ const props = defineProps<{
 const { nodesError } = inject<{
   nodesError: Ref<Recordable<ErrorInfo[]>>
 }>('flowDesign', { nodesError: ref({}) })
-const content = ref<string>('')
+const content = ref<string>('并行执行')
 watchEffect(() => {
 //   const errors: ErrorInfo[] = []
 //   const { id, name, def, conditions, next } = props.node
@@ -37,7 +37,7 @@ watchEffect(() => {
 
 <template>
   <div class="branch-node">
-    <Node v-bind="$attrs" icon="parallel_color" :node="node" :readOnly="true">
+    <Node v-bind="$attrs" icon="Parallels" color="#B0C4DE" :node="node" :readOnly="true">
       <el-text>{{ content }}</el-text>
       <slot name="append" />
     </Node>
