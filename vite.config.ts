@@ -13,7 +13,7 @@ import Unocss from 'unocss/vite'
 import {resolve} from "path";
 
 export default defineConfig({
-    base: '/lowflow-design',
+    base: '/',
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
