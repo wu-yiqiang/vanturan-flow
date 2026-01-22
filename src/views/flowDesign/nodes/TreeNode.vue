@@ -12,7 +12,7 @@ import Exclusive from './ExclusiveNode.vue'
 import Condition from './ConditionNode.vue'
 import Script from './ScriptNode.vue'
 import Parallel from './ParallelNode.vue'
-import Branch from './BranchNode.vue'
+import ParallelBranch from './ParalleBranchNode.vue'
 defineProps<{
   node: FlowNode
 }>()
@@ -26,7 +26,7 @@ const nodes: Recordable<Component> = {
   script: Script,
   exclusive: Exclusive,
   parallel: Parallel,
-  branch: Branch,
+  parallelBranch: ParallelBranch,
   condition: Condition,
   end: End
 }

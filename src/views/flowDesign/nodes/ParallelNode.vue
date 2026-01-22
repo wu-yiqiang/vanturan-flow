@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <ParalleGatewayNode v-bind="$attrs" :node="node">
     <template #default="{ addNode, readOnly }">
-      <el-button type="primary" :disabled="readOnly" @click="addNode('branch', node)" plain round
+      <el-button type="primary" :disabled="readOnly" @click="addNode('parallelBranch', node)" plain round
         >添加并行分支</el-button
       >
     </template>

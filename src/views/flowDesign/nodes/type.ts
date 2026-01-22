@@ -11,7 +11,7 @@ export type NodeType =
   | 'brance'
   | 'notify'
   | 'service'
-  | 'branch'
+  | 'parallelBranch'
   | 'condition'
   | 'end'
 
@@ -124,9 +124,14 @@ export interface ExclusiveNode extends BranchNode {
   branches: ConditionNode[]
 }
 
-export interface ParallelNode extends BranchNode {
-  branches: FlowNode[]
+export interface ParallelBranchNode extends FlowNode {
+  def: boolean,
 }
+export interface ParallelNode extends FlowNode {
+  branches: ParallelBranchNode[]
+}
+
+
 
 export interface ErrorInfo {
   id: string

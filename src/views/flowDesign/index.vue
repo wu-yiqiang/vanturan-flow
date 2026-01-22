@@ -9,7 +9,8 @@ import type { ErrorInfo, FlowNode, ServiceNode, TimerNode,ApprovalNode,
   ExclusiveNode,
   ScriptNode,
   NodeType, 
-  ParallelNode} from './nodes/type'
+  ParallelNode,
+  ParallelBranchNode} from './nodes/type'
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
 import { useDraggableScroll } from '@/hooks/useDraggableScroll'
@@ -63,7 +64,6 @@ provide('flowDesign', {
   nodesError: nodesError
 })
 const openPenal = (node: FlowNode) => {
-  console.log("节点属性值", node)
   activeData.value = node
   penalVisible.value = true
 }
@@ -132,17 +132,17 @@ const addParallel = (node: FlowNode) => {
   addParallelBranch(parallelNode)
   node.next = parallelNode
   if (parallelNode.branches.length > 0) {
-    const branch = parallelNode.branches[parallelNode.branches.length - 1] as ParallelNode
+    const branch = parallelNode.branches[parallelNode.branches.length - 1] as ParallelBranchNode
     branch.name = '分支1'
   }
-  console.log(parallelNode.branches);
 }
 const addParallelBranch = (node: FlowNode) => {
   const parallel = node as ParallelNode
   parallel.branches.splice(parallel.branches.length - 1, 0, {
     id: nextId(),
     pid: parallel.id,
-    type: 'branch',
+    type: 'parallelBranch',
+    def: false,
     name: `分支${parallel.branches.length + 1}`,
     next: undefined
   })
@@ -314,7 +314,7 @@ const addNode = (type: NodeType, node: FlowNode) => {
     notify: addNotify,
     service: addService,
     approval: addApproval,
-    branch: addParallelBranch,
+    parallelBranch: addParallelBranch,
     script: addScript
   }
   const fun = addMap[type]
