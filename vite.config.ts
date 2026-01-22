@@ -14,6 +14,9 @@ import {resolve} from "path";
 
 export default defineConfig({
     base: '/',
+    assetsInclude: [
+        '**/*.xml'
+    ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
