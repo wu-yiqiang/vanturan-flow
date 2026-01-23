@@ -18,10 +18,7 @@ const props = defineProps<{
 @import '@/styles/el-segmented.scss';
 
 .ButtonTab {
-  // display: grid;
-  // place-content: center;
   position: sticky;
-  // width: inherit;
   .el-tabs {
     height: 100%;
     width: 100%;
