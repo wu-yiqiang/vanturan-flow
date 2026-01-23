@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AdvancedFilter: typeof import('./../components/AdvancedFilter/index.vue')['default']
+    ButtonTab: typeof import('./../components/ButtonTab/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -52,6 +53,7 @@ declare module 'vue' {
     RoleTag: typeof import('./../components/RoleSelector/RoleTag.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sadasd: typeof import('./../components/sadasd/index.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon/index.tsx')['default']
     Trigger: typeof import('./../components/AdvancedFilter/Trigger.vue')['default']
     UserPicker: typeof import('./../components/UserSelector/UserPicker.vue')['default']

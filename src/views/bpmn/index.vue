@@ -15,14 +15,15 @@ import Designer from './designer/index.vue'
 </script>
 <style scoped lang='scss'>
 .Bpmn {
-    // height: 100%;
-    flex: 1;
+    height: inherit;
     display: flex;
     flex-direction: column;
     .main-box {
       flex: 1;
+      padding: 0 var(--padding-width) var(--padding-width) var(--padding-width);
       display: flex;
       justify-content: space-between;
+      column-gap: 20px;
     }
 }
 </style>

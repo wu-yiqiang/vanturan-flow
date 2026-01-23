@@ -9,7 +9,4 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 </template>
 
 <style scoped>
-#app {
-  color: var(--el-text-color-primary);
-}
 </style>
