@@ -7,6 +7,12 @@
        <template #class2>
         class2
       </template>
+      <template #class3>
+        class3
+      </template>
+      <template #class4>
+        class4
+      </template>
     </ButtonTab>
   </section>
 </template>

@@ -1,42 +1,32 @@
 <template>
   <section class='Designer'>
-    <div ref="bpmncanvas" id="bpmncanvas" class="bpmncanvas"></div>
-    <section class='Palette' id="Palette"></section>
+      <div id="bpmncanvas" ref="bpmncanvas" class="bpmncanvas"></div>
+      <section class='Palette' id="Palette"></section>
   </section>
 </template>
 
-<script setup lang='ts'>
-import BpmnModeler from 'bpmn-js/lib/Modeler'
-import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
-import BpmnViewer from 'bpmn-js';
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import BpmnModeler from 'bpmn-js/lib/Modeler';
+import customIconProviderModule from './customIconProvider';
 import { xmlStr } from './datas';
-const bpmModeler = ref()
 const bpmncanvas = ref()
-const init = () => {
-  bpmModeler.value = new BpmnModeler({
+onMounted(async () => {
+  const modeler = new BpmnModeler({
     container: bpmncanvas.value,
     propertiesPanel: {
-        parent: '#Palette'
-      },
-      additionalModules: [
-        // propertiesProviderModule
-      ]
-  })
-  createNewDiagram()
-}
-const createNewDiagram = () => {
-  bpmModeler.value.importXML(xmlStr, (err: any) => {
-    if (err) {
-      console.error('加载失败')
-    } else {
-      console.log('加载成功')
-    }
-  })
-}
-onMounted(() => {
- init()
-})
+      parent: '#Palette'
+    },
+    additionalModules: [customIconProviderModule]
+  });
+  try {
+    await modeler.importXML(xmlStr);
+  } catch (err) {
+    console.error('初始化错误:', err);
+  }
+});
 </script>
+
 <style scoped lang='scss'>
 .Designer {
   flex: 1;
