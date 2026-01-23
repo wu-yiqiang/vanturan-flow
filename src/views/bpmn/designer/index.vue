@@ -38,6 +38,9 @@ onMounted(async () => {
       border: none !important;
       outline: none !important;
     }
+    :deep(.bjs-powered-by) {
+      display: none;
+    }
   }
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <section class='Pannel'>
     <ButtonTab :tabs="tabs" activeKey="class1" >
-      <template #class1>
+      <template #common>
         class1
       </template>
-       <template #class2>
+       <template #form>
         class2
       </template>
-      <template #class3>
+      <template #permission>
         class3
       </template>
       <template #class4>
@@ -20,10 +20,10 @@
 <script setup lang='ts'>
 import ButtonTab from '@/components/ButtonTab/index.vue'
 const tabs = [
-  {label: '分类1', value: 'class1' },
-  {label: '分类2', value: 'class2'},
-  {label: '分类3', value: 'class3'},
-  {label: '分类4', value: 'class4'},
+  {label: '通用属性', value: 'common' },
+  {label: '表单权限', value: 'form'},
+  {label: '操作权限', value: 'permission'},
+  // {label: '分类4', value: 'class4'},
 ]
 </script>
 <style scoped lang='scss'>
