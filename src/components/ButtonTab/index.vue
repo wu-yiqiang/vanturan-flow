@@ -26,11 +26,9 @@ const props = defineProps<{
     flex-direction: column;
     overflow: hidden;
     position: inherit;
-
     .el-tabs__header {
       position: sticky;
     }
-
     :deep(.el-tabs__content) {
       flex: 1;
       display: flex;
